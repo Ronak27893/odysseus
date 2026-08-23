@@ -1,0 +1,30 @@
+{
+  "source_name": "synthetic",
+  "n_tickers": 1200,
+  "n_rows": 1717126,
+  "date_min": "2015-01-06",
+  "date_max": "2024-12-31",
+  "dead_ticker_share": 0.13666666666666666,
+  "n_dead_tickers": 164,
+  "suspected_unadjusted_splits": 8,
+  "tickers_with_suspected_splits": [
+    "SYN0097",
+    "SYN0194",
+    "SYN0779",
+    "SYN0843",
+    "SYN0860",
+    "SYN1178",
+    "SYN1187",
+    "SYN1195"
+  ],
+  "float_history_is_snapshot": false,
+  "float_coverage": 1.0,
+  "n_nonpositive_prices": 0,
+  "n_duplicate_rows": 0,
+  "n_zero_volume_days": 0,
+  "fatal": [],
+  "warnings": [
+    "8 suspected UNADJUSTED split(s) across 8 ticker(s) (0.7% of the universe); reverse splits reproduce the run-up/volume-collapse signature exactly -- affected events are flagged, not dropped"
+  ],
+  "ok": true
+}

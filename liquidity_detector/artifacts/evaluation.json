@@ -1,0 +1,781 @@
+{
+  "results": [
+    {
+      "model": "logistic",
+      "mode": "screen",
+      "n_events": 690,
+      "n_positive": 39,
+      "base_rate": 0.05652173913043478,
+      "pr_auc": 0.660324808986005,
+      "pr_auc_ci": [
+        0.5191889035130696,
+        0.8146900093752956
+      ],
+      "pr_auc_lift": 11.682669697444704,
+      "roc_auc": 0.9722320690062625,
+      "precision_at_k": {
+        "10": 0.7,
+        "25": 0.72,
+        "50": 0.64,
+        "top1%": 0.5714285714285714,
+        "top5%": 0.6470588235294118
+      },
+      "lift_at_k": {
+        "10": 12.384615384615383,
+        "25": 12.738461538461538,
+        "50": 11.323076923076924,
+        "top1%": 10.10989010989011,
+        "top5%": 11.447963800904978
+      },
+      "control_flag_rate": {
+        "biotech_readout": 0.0,
+        "earnings_surprise": 0.0,
+        "index_inclusion": 0.0,
+        "ma_announcement": 0.0,
+        "meme_attention": 0.1,
+        "short_squeeze": 0.0
+      },
+      "control_flag_rate_overall": 0.01282051282051282,
+      "ece": 0.06783163626711809,
+      "mean_predicted": 0.12357446500798352,
+      "observed_rate": 0.05652173913043478,
+      "folds": [
+        {
+          "index": 0,
+          "train_start": "2015-08-21",
+          "train_end": "2020-02-05",
+          "test_start": "2020-08-07",
+          "test_end": "2021-07-02",
+          "n_train": 296,
+          "n_train_pos": 5,
+          "n_test": 138,
+          "n_test_pos": 7,
+          "n_purged": 75
+        },
+        {
+          "index": 1,
+          "train_start": "2015-08-21",
+          "train_end": "2021-01-01",
+          "test_start": "2021-07-02",
+          "test_end": "2022-05-18",
+          "n_train": 430,
+          "n_train_pos": 10,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 79
+        },
+        {
+          "index": 2,
+          "train_start": "2015-08-21",
+          "train_end": "2021-11-19",
+          "test_start": "2022-05-19",
+          "test_end": "2023-03-23",
+          "n_train": 552,
+          "n_train_pos": 18,
+          "n_test": 138,
+          "n_test_pos": 6,
+          "n_purged": 95
+        },
+        {
+          "index": 3,
+          "train_start": "2015-08-21",
+          "train_end": "2022-09-28",
+          "test_start": "2023-03-27",
+          "test_end": "2023-12-06",
+          "n_train": 715,
+          "n_train_pos": 25,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 70
+        },
+        {
+          "index": 4,
+          "train_start": "2015-08-21",
+          "train_end": "2023-06-07",
+          "test_start": "2023-12-06",
+          "test_end": "2024-07-10",
+          "n_train": 822,
+          "n_train_pos": 31,
+          "n_test": 138,
+          "n_test_pos": 8,
+          "n_purged": 101
+        }
+      ],
+      "notes": [
+        "scores are OVER-confident: class_weight='balanced' reweights the positive class, so outputs are valid for RANKING but must not be read as probabilities without a separate calibration step",
+        "training rows purged at fold boundaries to respect the 180-day label horizon: 420"
+      ]
+    },
+    {
+      "model": "gbm",
+      "mode": "screen",
+      "n_events": 690,
+      "n_positive": 39,
+      "base_rate": 0.05652173913043478,
+      "pr_auc": 0.6186226410553362,
+      "pr_auc_ci": [
+        0.4656201379530096,
+        0.7932112560952465
+      ],
+      "pr_auc_lift": 10.944862110979024,
+      "roc_auc": 0.9422781519555712,
+      "precision_at_k": {
+        "10": 0.7,
+        "25": 0.72,
+        "50": 0.6,
+        "top1%": 0.8571428571428571,
+        "top5%": 0.6470588235294118
+      },
+      "lift_at_k": {
+        "10": 12.384615384615383,
+        "25": 12.738461538461538,
+        "50": 10.615384615384615,
+        "top1%": 15.164835164835164,
+        "top5%": 11.447963800904978
+      },
+      "control_flag_rate": {
+        "biotech_readout": 0.0,
+        "earnings_surprise": 0.0,
+        "index_inclusion": 0.0,
+        "ma_announcement": 0.0,
+        "meme_attention": 0.05,
+        "short_squeeze": 0.09523809523809523
+      },
+      "control_flag_rate_overall": 0.019230769230769232,
+      "ece": 0.02407482979802577,
+      "mean_predicted": 0.061806436128179,
+      "observed_rate": 0.05652173913043478,
+      "folds": [
+        {
+          "index": 0,
+          "train_start": "2015-08-21",
+          "train_end": "2020-02-05",
+          "test_start": "2020-08-07",
+          "test_end": "2021-07-02",
+          "n_train": 296,
+          "n_train_pos": 5,
+          "n_test": 138,
+          "n_test_pos": 7,
+          "n_purged": 75
+        },
+        {
+          "index": 1,
+          "train_start": "2015-08-21",
+          "train_end": "2021-01-01",
+          "test_start": "2021-07-02",
+          "test_end": "2022-05-18",
+          "n_train": 430,
+          "n_train_pos": 10,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 79
+        },
+        {
+          "index": 2,
+          "train_start": "2015-08-21",
+          "train_end": "2021-11-19",
+          "test_start": "2022-05-19",
+          "test_end": "2023-03-23",
+          "n_train": 552,
+          "n_train_pos": 18,
+          "n_test": 138,
+          "n_test_pos": 6,
+          "n_purged": 95
+        },
+        {
+          "index": 3,
+          "train_start": "2015-08-21",
+          "train_end": "2022-09-28",
+          "test_start": "2023-03-27",
+          "test_end": "2023-12-06",
+          "n_train": 715,
+          "n_train_pos": 25,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 70
+        },
+        {
+          "index": 4,
+          "train_start": "2015-08-21",
+          "train_end": "2023-06-07",
+          "test_start": "2023-12-06",
+          "test_end": "2024-07-10",
+          "n_train": 822,
+          "n_train_pos": 31,
+          "n_test": 138,
+          "n_test_pos": 8,
+          "n_purged": 101
+        }
+      ],
+      "notes": [
+        "training rows purged at fold boundaries to respect the 180-day label horizon: 420"
+      ]
+    },
+    {
+      "model": "logistic",
+      "mode": "forensic",
+      "n_events": 690,
+      "n_positive": 39,
+      "base_rate": 0.05652173913043478,
+      "pr_auc": 0.7150612128810598,
+      "pr_auc_ci": [
+        0.5818243982361304,
+        0.8886000779524068
+      ],
+      "pr_auc_lift": 12.651082997126442,
+      "roc_auc": 0.9649454488164165,
+      "precision_at_k": {
+        "10": 0.7,
+        "25": 0.8,
+        "50": 0.66,
+        "top1%": 0.7142857142857143,
+        "top5%": 0.7647058823529411
+      },
+      "lift_at_k": {
+        "10": 12.384615384615383,
+        "25": 14.153846153846155,
+        "50": 11.676923076923078,
+        "top1%": 12.637362637362637,
+        "top5%": 13.529411764705882
+      },
+      "control_flag_rate": {
+        "biotech_readout": 0.038461538461538464,
+        "earnings_surprise": 0.0,
+        "index_inclusion": 0.0,
+        "ma_announcement": 0.0,
+        "meme_attention": 0.0,
+        "short_squeeze": 0.0
+      },
+      "control_flag_rate_overall": 0.00641025641025641,
+      "ece": 0.06532187697640732,
+      "mean_predicted": 0.11850539122888065,
+      "observed_rate": 0.05652173913043478,
+      "folds": [
+        {
+          "index": 0,
+          "train_start": "2015-08-21",
+          "train_end": "2020-02-05",
+          "test_start": "2020-08-07",
+          "test_end": "2021-07-02",
+          "n_train": 296,
+          "n_train_pos": 5,
+          "n_test": 138,
+          "n_test_pos": 7,
+          "n_purged": 75
+        },
+        {
+          "index": 1,
+          "train_start": "2015-08-21",
+          "train_end": "2021-01-01",
+          "test_start": "2021-07-02",
+          "test_end": "2022-05-18",
+          "n_train": 430,
+          "n_train_pos": 10,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 79
+        },
+        {
+          "index": 2,
+          "train_start": "2015-08-21",
+          "train_end": "2021-11-19",
+          "test_start": "2022-05-19",
+          "test_end": "2023-03-23",
+          "n_train": 552,
+          "n_train_pos": 18,
+          "n_test": 138,
+          "n_test_pos": 6,
+          "n_purged": 95
+        },
+        {
+          "index": 3,
+          "train_start": "2015-08-21",
+          "train_end": "2022-09-28",
+          "test_start": "2023-03-27",
+          "test_end": "2023-12-06",
+          "n_train": 715,
+          "n_train_pos": 25,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 70
+        },
+        {
+          "index": 4,
+          "train_start": "2015-08-21",
+          "train_end": "2023-06-07",
+          "test_start": "2023-12-06",
+          "test_end": "2024-07-10",
+          "n_train": 822,
+          "n_train_pos": 31,
+          "n_test": 138,
+          "n_test_pos": 8,
+          "n_purged": 101
+        }
+      ],
+      "notes": [
+        "scores are OVER-confident: class_weight='balanced' reweights the positive class, so outputs are valid for RANKING but must not be read as probabilities without a separate calibration step",
+        "training rows purged at fold boundaries to respect the 180-day label horizon: 420"
+      ]
+    },
+    {
+      "model": "gbm",
+      "mode": "forensic",
+      "n_events": 690,
+      "n_positive": 39,
+      "base_rate": 0.05652173913043478,
+      "pr_auc": 0.6765948372955283,
+      "pr_auc_ci": [
+        0.5372805984322266,
+        0.8413205654582399
+      ],
+      "pr_auc_lift": 11.970524044459346,
+      "roc_auc": 0.9582890228051518,
+      "precision_at_k": {
+        "10": 0.7,
+        "25": 0.76,
+        "50": 0.62,
+        "top1%": 0.5714285714285714,
+        "top5%": 0.7058823529411765
+      },
+      "lift_at_k": {
+        "10": 12.384615384615383,
+        "25": 13.446153846153846,
+        "50": 10.96923076923077,
+        "top1%": 10.10989010989011,
+        "top5%": 12.48868778280543
+      },
+      "control_flag_rate": {
+        "biotech_readout": 0.0,
+        "earnings_surprise": 0.0,
+        "index_inclusion": 0.0,
+        "ma_announcement": 0.0,
+        "meme_attention": 0.15,
+        "short_squeeze": 0.047619047619047616
+      },
+      "control_flag_rate_overall": 0.02564102564102564,
+      "ece": 0.01881939286994516,
+      "mean_predicted": 0.06340651962221389,
+      "observed_rate": 0.05652173913043478,
+      "folds": [
+        {
+          "index": 0,
+          "train_start": "2015-08-21",
+          "train_end": "2020-02-05",
+          "test_start": "2020-08-07",
+          "test_end": "2021-07-02",
+          "n_train": 296,
+          "n_train_pos": 5,
+          "n_test": 138,
+          "n_test_pos": 7,
+          "n_purged": 75
+        },
+        {
+          "index": 1,
+          "train_start": "2015-08-21",
+          "train_end": "2021-01-01",
+          "test_start": "2021-07-02",
+          "test_end": "2022-05-18",
+          "n_train": 430,
+          "n_train_pos": 10,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 79
+        },
+        {
+          "index": 2,
+          "train_start": "2015-08-21",
+          "train_end": "2021-11-19",
+          "test_start": "2022-05-19",
+          "test_end": "2023-03-23",
+          "n_train": 552,
+          "n_train_pos": 18,
+          "n_test": 138,
+          "n_test_pos": 6,
+          "n_purged": 95
+        },
+        {
+          "index": 3,
+          "train_start": "2015-08-21",
+          "train_end": "2022-09-28",
+          "test_start": "2023-03-27",
+          "test_end": "2023-12-06",
+          "n_train": 715,
+          "n_train_pos": 25,
+          "n_test": 138,
+          "n_test_pos": 9,
+          "n_purged": 70
+        },
+        {
+          "index": 4,
+          "train_start": "2015-08-21",
+          "train_end": "2023-06-07",
+          "test_start": "2023-12-06",
+          "test_end": "2024-07-10",
+          "n_train": 822,
+          "n_train_pos": 31,
+          "n_test": 138,
+          "n_test_pos": 8,
+          "n_purged": 101
+        }
+      ],
+      "notes": [
+        "training rows purged at fold boundaries to respect the 180-day label horizon: 420"
+      ]
+    }
+  ],
+  "integrity": {
+    "source_name": "synthetic",
+    "n_tickers": 1200,
+    "n_rows": 1717126,
+    "date_min": "2015-01-06",
+    "date_max": "2024-12-31",
+    "dead_ticker_share": 0.13666666666666666,
+    "n_dead_tickers": 164,
+    "suspected_unadjusted_splits": 8,
+    "tickers_with_suspected_splits": [
+      "SYN0097",
+      "SYN0194",
+      "SYN0779",
+      "SYN0843",
+      "SYN0860",
+      "SYN1178",
+      "SYN1187",
+      "SYN1195"
+    ],
+    "float_history_is_snapshot": false,
+    "float_coverage": 1.0,
+    "n_nonpositive_prices": 0,
+    "n_duplicate_rows": 0,
+    "n_zero_volume_days": 0,
+    "fatal": [],
+    "warnings": [
+      "8 suspected UNADJUSTED split(s) across 8 ticker(s) (0.7% of the universe); reverse splits reproduce the run-up/volume-collapse signature exactly -- affected events are flagged, not dropped"
+    ],
+    "ok": true
+  },
+  "censoring": {
+    "n_events": 1573,
+    "n_positive": 48,
+    "base_rate": 0.030514939605848695,
+    "n_censored": 102,
+    "censored_share": 0.06484424666242848,
+    "n_control": 284,
+    "control_kinds": {
+      "index_inclusion": 55,
+      "earnings_surprise": 53,
+      "meme_attention": 47,
+      "biotech_readout": 46,
+      "short_squeeze": 43,
+      "ma_announcement": 40
+    },
+    "label_kinds": {
+      "delisting": 29,
+      "sec_suspension": 19
+    },
+    "note": "Negatives include undetected manipulation. Enforcement is a lagged, filtered observation of the phenomenon, so precision here is a lower bound and recall is measured against detected cases only."
+  },
+  "coefficients": [
+    {
+      "feature": "news_filing_in_window",
+      "coef_std": -1.7453659949952134,
+      "odds_ratio_per_sd": 0.1745810814705352
+    },
+    {
+      "feature": "overnight_share",
+      "coef_std": 1.3104201907648219,
+      "odds_ratio_per_sd": 3.707731339404258
+    },
+    {
+      "feature": "small_trade_share",
+      "coef_std": 1.2571748818043962,
+      "odds_ratio_per_sd": 3.5154758104456163
+    },
+    {
+      "feature": "float_turnover",
+      "coef_std": 1.1434951790494299,
+      "odds_ratio_per_sd": 3.137716101472783
+    },
+    {
+      "feature": "closing_auction_share",
+      "coef_std": -0.971572670739325,
+      "odds_ratio_per_sd": 0.37848733384770455
+    },
+    {
+      "feature": "volume_decay",
+      "coef_std": -0.9106371697946453,
+      "odds_ratio_per_sd": 0.40226782944858563
+    },
+    {
+      "feature": "concentration_ratio",
+      "coef_std": -0.8956668852262061,
+      "odds_ratio_per_sd": 0.4083351951110398
+    },
+    {
+      "feature": "prior_reverse_splits",
+      "coef_std": 0.676210510799118,
+      "odds_ratio_per_sd": 1.9664118986623937
+    },
+    {
+      "feature": "runup",
+      "coef_std": 0.2962145020244565,
+      "odds_ratio_per_sd": 1.344758579335014
+    },
+    {
+      "feature": "days_since_ipo_log",
+      "coef_std": 0.2766659343866252,
+      "odds_ratio_per_sd": 1.3187257565132535
+    },
+    {
+      "feature": "offering_within_10d",
+      "coef_std": 0.23946268627383935,
+      "odds_ratio_per_sd": 1.2705662741793584
+    },
+    {
+      "feature": "gap_without_news",
+      "coef_std": -0.16240496570325533,
+      "odds_ratio_per_sd": 0.8500968747453436
+    },
+    {
+      "feature": "offering_prior_10d",
+      "coef_std": -0.16015252527018436,
+      "odds_ratio_per_sd": 0.8520138254161781
+    },
+    {
+      "feature": "retracement",
+      "coef_std": 0.06573937076049095,
+      "odds_ratio_per_sd": 1.0679483423269622
+    }
+  ],
+  "robustness": [
+    {
+      "window": 3,
+      "n_events": 690,
+      "n_positive": 39,
+      "pr_auc": 0.7408965771104251,
+      "pr_auc_lo": 0.6089825542237685,
+      "pr_auc_hi": 0.8930558659865325,
+      "lift": 13.108170210415214
+    },
+    {
+      "window": 5,
+      "n_events": 690,
+      "n_positive": 39,
+      "pr_auc": 0.7150612128810598,
+      "pr_auc_lo": 0.5818243982361304,
+      "pr_auc_hi": 0.8886000779524068,
+      "lift": 12.651082997126442
+    },
+    {
+      "window": 10,
+      "n_events": 690,
+      "n_positive": 39,
+      "pr_auc": 0.7795429514504045,
+      "pr_auc_lo": 0.6460528490942812,
+      "pr_auc_hi": 0.922071770035422,
+      "lift": 13.791913756430233
+    }
+  ],
+  "univariate_diagnostics": [
+    {
+      "feature": "volume_decay",
+      "auc": 0.04461942257217846,
+      "auc_directional": 0.9553805774278216,
+      "median_positive": 0.1215093524030578,
+      "median_negative": 0.9414503482525379,
+      "mannwhitney_p": 4.17944542358267e-25,
+      "coverage": 1.0,
+      "suspected_leak": true
+    },
+    {
+      "feature": "runup",
+      "auc": 0.9271216097987752,
+      "auc_directional": 0.9271216097987752,
+      "median_positive": 4.337152416766527,
+      "median_negative": 1.1773881795104861,
+      "mannwhitney_p": 2.792341654213333e-22,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "float_turnover",
+      "auc": 0.9142388451443568,
+      "auc_directional": 0.9142388451443568,
+      "median_positive": 5.07091870588753,
+      "median_negative": 0.6947943087122874,
+      "mannwhitney_p": 4.730328350323172e-21,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "float_shares",
+      "auc": 0.09095581802274715,
+      "auc_directional": 0.9090441819772529,
+      "median_positive": 12710394.345280576,
+      "median_negative": 50819884.85890198,
+      "mannwhitney_p": 1.445305053201521e-20,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "gap_without_news",
+      "auc": 0.8832303563627286,
+      "auc_directional": 0.8832303563627286,
+      "median_positive": 0.704929633546934,
+      "median_negative": 0.4177033623876662,
+      "mannwhitney_p": 5.3128097958146604e-17,
+      "coverage": 0.7587181903864278,
+      "suspected_leak": false
+    },
+    {
+      "feature": "small_trade_share",
+      "auc": 0.8742344706911636,
+      "auc_directional": 0.8742344706911636,
+      "median_positive": 0.7137745321461982,
+      "median_negative": 0.539082813730879,
+      "mannwhitney_p": 1.8042665586677945e-17,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "offering_within_10d",
+      "auc": 0.7971237970253718,
+      "auc_directional": 0.7971237970253718,
+      "median_positive": 1.0,
+      "median_negative": 0.0,
+      "mannwhitney_p": 2.4085086483627268e-49,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "retracement",
+      "auc": 0.7898455529913013,
+      "auc_directional": 0.7898455529913013,
+      "median_positive": 0.9388881182726203,
+      "median_negative": 0.44822062816511016,
+      "mannwhitney_p": 1.8531135499188284e-10,
+      "coverage": 0.6578699340245052,
+      "suspected_leak": false
+    },
+    {
+      "feature": "concentration_ratio",
+      "auc": 0.7814523184601925,
+      "auc_directional": 0.7814523184601925,
+      "median_positive": 20.270702574906682,
+      "median_negative": 9.37129418925062,
+      "mannwhitney_p": 1.58565097246768e-10,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "prior_reverse_splits",
+      "auc": 0.768503937007874,
+      "auc_directional": 0.768503937007874,
+      "median_positive": 1.0,
+      "median_negative": 0.0,
+      "mannwhitney_p": 1.427024273249104e-44,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "overnight_share",
+      "auc": 0.7644323784559697,
+      "auc_directional": 0.7644323784559697,
+      "median_positive": 0.704929633546934,
+      "median_negative": 0.47312176915101434,
+      "mannwhitney_p": 7.666758361253968e-09,
+      "coverage": 0.7587181903864278,
+      "suspected_leak": false
+    },
+    {
+      "feature": "liquidity_concentration",
+      "auc": 0.7618985126859142,
+      "auc_directional": 0.7618985126859142,
+      "median_positive": 0.2606379362609191,
+      "median_negative": 0.11804761110465689,
+      "mannwhitney_p": 2.6414421355307787e-09,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "window_dollar_volume",
+      "auc": 0.6675196850393702,
+      "auc_directional": 0.6675196850393702,
+      "median_positive": 584194344.579601,
+      "median_negative": 261480331.9249164,
+      "mannwhitney_p": 0.00014048295880248406,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "market_cap_proxy",
+      "auc": 0.33442694663167105,
+      "auc_directional": 0.665573053368329,
+      "median_positive": 202261719.4848776,
+      "median_negative": 432736016.0261369,
+      "mannwhitney_p": 0.0001678393244355036,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "days_since_ipo_log",
+      "auc": 0.4308727034120735,
+      "auc_directional": 0.5691272965879265,
+      "median_positive": 6.641182169740591,
+      "median_negative": 6.8951763685906755,
+      "mannwhitney_p": 0.11619401117969047,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "offering_prior_10d",
+      "auc": 0.5553477690288714,
+      "auc_directional": 0.5553477690288714,
+      "median_positive": 0.0,
+      "median_negative": 0.0,
+      "mannwhitney_p": 8.444121068733495e-06,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "news_filing_in_window",
+      "auc": 0.44881889763779526,
+      "auc_directional": 0.5511811023622047,
+      "median_positive": 0.0,
+      "median_negative": 0.0,
+      "mannwhitney_p": 0.023927417835109818,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "peak_relative_volume",
+      "auc": 0.5255030621172354,
+      "auc_directional": 0.5255030621172354,
+      "median_positive": 29.488703738093406,
+      "median_negative": 30.398422730183654,
+      "mannwhitney_p": 0.5623111674638941,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "closing_auction_share",
+      "auc": 0.4790463692038496,
+      "auc_directional": 0.5209536307961504,
+      "median_positive": 0.07174111641830784,
+      "median_negative": 0.07307457471234559,
+      "mannwhitney_p": 0.6340688466205594,
+      "coverage": 1.0,
+      "suspected_leak": false
+    },
+    {
+      "feature": "suspected_unadjusted_split",
+      "auc": 0.4965551181102362,
+      "auc_directional": 0.5034448818897638,
+      "median_positive": 0.0,
+      "median_negative": 0.0,
+      "mannwhitney_p": 0.5777859147096298,
+      "coverage": 1.0,
+      "suspected_leak": false
+    }
+  ],
+  "source": "synthetic"
+}

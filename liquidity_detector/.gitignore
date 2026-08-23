@@ -1,0 +1,15 @@
+# Regenerable binaries: `python -m ldx.cli run` rebuilds both.
+artifacts/features.parquet
+artifacts/model.joblib
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# The repository root .gitignore excludes `data/` and `*.png`, which would
+# silently drop this package's data-source subpackage and the calibration
+# plot. Re-include them here. The directory itself must be un-ignored before
+# its contents can be: git cannot re-include a file whose parent is excluded.
+!ldx/data/
+!ldx/data/*.py
+!artifacts/calibration.png
