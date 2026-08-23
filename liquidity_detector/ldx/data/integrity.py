@@ -178,6 +178,13 @@ def audit_panel(panel, strict: bool = True) -> IntegrityReport:
         msg = (f"universe contains {rep.dead_ticker_share:.1%} terminated securities "
                f"(< {MIN_DEAD_TICKER_SHARE:.0%}); a survivor-only panel removes the "
                f"positive class by construction")
+        note = getattr(panel, "survivorship_note", None)
+        if note:
+            # The source already declared itself survivor-only. Say what that
+            # rules out, precisely, instead of repeating a generic failure.
+            msg += (f". Source declares: {note} Supervised metrics from this panel "
+                    f"would be measured against a negative class only and must not "
+                    f"be reported; the unsupervised screen remains valid")
         rep.fatal.append(msg)
 
     # --- split adjustment -------------------------------------------------

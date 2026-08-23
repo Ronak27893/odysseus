@@ -28,9 +28,10 @@ real data via the adapters below and the same commands produce real results.
 
 ```bash
 pip install -r requirements.txt
-python -m ldx.cli run --tickers 1200          # synthetic validation run
+python -m ldx.cli run --tickers 1200          # synthetic validation run (supervised)
+python -m ldx.cli screen --source yfinance --universe universe.txt  # unsupervised
 python -m ldx.cli audit --source csv --path /data/crsp   # integrity only
-python -m pytest tests/ -q                    # 49 tests
+python -m pytest tests/ -q                    # 71 tests
 ```
 
 ## Data adapters
@@ -39,6 +40,7 @@ python -m pytest tests/ -q                    # 49 tests
 |---|---|
 | `ldx.data.csv_source.CsvSource` | **Recommended.** A directory of CSV/Parquet — CRSP extract, Nasdaq Data Link, Polygon flat files. |
 | `ldx.data.polygon.PolygonSource` | Polygon REST. Calls `/v3/reference/tickers?active=false` so delisted names are included. Needs `POLYGON_API_KEY`. |
+| `ldx.data.yfinance_source.YFinanceSource` | Free and easy, **survivor-only**. Good for the unsupervised screen; cannot support supervised training — see below. |
 | `ldx.data.synthetic` | Offline validation only. |
 | `ldx.edgar.EdgarClient` | Filing history, full-text search, suspension list. Needs `SEC_USER_AGENT` with contact info; rate-limited to 8 req/s. |
 
@@ -49,6 +51,43 @@ python -m pytest tests/ -q                    # 49 tests
 Two requirements no loader can verify for you, so `audit_panel` measures them
 from the bars: **prices must be split-adjusted** and **the universe must
 include delisted securities**.
+
+## Using yfinance
+
+```bash
+printf 'ABCD\nEFGH\nIJKL\n' > universe.txt
+python -m ldx.cli screen --source yfinance --universe universe.txt \
+    --start 2019-01-01 --top 50
+```
+
+`screen` is the unsupervised path: it ranks candidate events by how far they
+sit from the candidate population on the hypothesised axes, so it needs no
+labels. That matters because **yfinance cannot supply the positive class** —
+Yahoo drops history for suspended and delisted issuers, which is precisely the
+population the labels come from. `ldx.cli run` (supervised) will fail the
+integrity audit on a yfinance panel, by design, with a message saying why.
+
+Three details the adapter gets right, each of which caused a problem in the
+earlier exploratory pass:
+
+- **`Close`, not `Adj Close`.** Yahoo's `Close` is split-adjusted and its
+  `Volume` is split-adjusted to match — exactly what this model needs.
+  `Adj Close` is additionally dividend-adjusted, which distorts both the traded
+  price level and dollar volume. The adapter passes `auto_adjust=False` and
+  reads `Close`; `tests/test_yfinance_source.py` proves which column is used.
+- **Share counts come from `get_shares_full()`, a time series** — not the
+  `floatShares` snapshot in `.info`. A snapshot is the wrong denominator for an
+  event three years ago and is the most likely source of implausible readings
+  like 124x turnover. Pass `--no-shares-history` to skip it (much faster, but
+  then there is no point-in-time denominator).
+- **Shares outstanding is not float.** yfinance's series is shares
+  outstanding, which is larger than float, so turnover computed against it is a
+  **lower bound** on true float turnover. The adapter records the basis on the
+  panel rather than passing one off as the other.
+
+Reverse splits are read from `Ticker.splits` and normalised (yfinance reports
+a 1-for-10 as `0.1`), so declared splits are excluded from the unadjusted-split
+detector instead of firing it.
 
 ## What runs, in order
 
@@ -70,6 +109,10 @@ include delisted securities**.
    bootstrap CIs, precision@k, control FPR by confound type, ECE.
 7. **Deliverables** → `artifacts/`: `features.parquet`, `model.joblib`,
    `calibration.png`, `screen.csv`, `evaluation.json`, `integrity.json`.
+
+For sources with no positive class, `ldx/unsupervised.py` replaces steps 3–6
+with a transparent weighted robust-z composite. It is a stated prior, not a
+fitted model, and nothing about it is validated — see `METHODS.md` §10.
 
 ## Screen vs forensic
 

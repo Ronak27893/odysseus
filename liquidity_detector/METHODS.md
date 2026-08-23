@@ -199,7 +199,52 @@ multi-thousand-name decade-long panel. Consequently:
 - ROC-AUC is reported only to show how much it flatters at this base rate
   (0.94–0.97 against PR-AUC 0.61–0.72)
 
-## 10. What would actually advance this
+## 10. The yfinance path specifically
+
+yfinance is reachable and free, and it is the right tool for exactly one of
+the two jobs here.
+
+**What it supports.** The unsupervised screen. Candidate detection, every
+price/volume feature, the split-adjustment audit and the ranking all work on
+live names.
+
+**What it cannot support.** Supervised training, validation, or any quoted
+performance number. Yahoo drops history for suspended and delisted issuers, so
+the positive class is absent by construction — not scarce, absent. The audit
+fails a yfinance panel deliberately and says so; running the supervised
+pipeline anyway would fit a model against a negative class and report metrics
+that mean nothing. This is the same wall the earlier exploratory pass hit when
+only 2 of 100 suspensions had usable price history, and no amount of care in
+the modelling fixes it. It is a property of the data source.
+
+**Shares outstanding is not float.** `get_shares_full()` returns shares
+outstanding. Float is smaller — often much smaller for a recent IPO or a
+controlled company — so `float_turnover` computed on a yfinance panel is a
+**lower bound**. Read a value of 3x as "at least three times the float", which
+is still the interesting statement, but do not treat the number as the float
+multiple. The panel records `share_count_basis` so this is not lost downstream.
+
+**Use `Close`, never `Adj Close`.** `Close` is split-adjusted and `Volume` is
+split-adjusted to match. `Adj Close` is additionally dividend-adjusted, which
+misstates both the traded price level and dollar volume. The adapter is
+pinned to `auto_adjust=False` and a test asserts which column is read, because
+this is a silent-wrong-answer failure rather than a crash.
+
+**The score is a prior, not a model.** Weights in `ldx/unsupervised.py` follow
+the hypothesis — float turnover heaviest, because the claim is that the move
+exists to create exit depth — and were not tuned against any outcome. With no
+labels there is no precision to report and no calibration to check.
+
+**Confound contamination is the binding limitation, and it is large.** Scored
+against the synthetic panel, where labels do exist, the heuristic ranks well
+against random names (precision@10 of 0.70, roughly 16x the base rate) — but
+**19 of the top 50 were legitimate confounds**: 11 short squeezes, 5
+meme-attention moves, 3 biotech readouts. That is the SPCE problem, quantified.
+A ~40% confound rate in the top of the ranking is the realistic expectation for
+any price-and-volume-only screen, and it is why the EDGAR layer matters: adding
+filing presence was worth more than any price feature (§6).
+
+## 11. What would actually advance this
 
 In descending order of expected value:
 
